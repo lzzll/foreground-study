@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计数器组件</title>
+		<style>
+			.active{
+				color: #FF0000;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		<!-- 使用组件 -->
+		<div id = "app">
+			<counter-conc></counter-conc>
+		</div>
+		
+		<!-- 抽离模板 -->
+		<template id="counterConc">
+			<div>
+			<h2>计数器:{{counter}}</h2>
+			<button @click="add">+</button>
+			<button @click="sub">-</button>
+			</div>
+		</template>
+		
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// crtl+shift+r复制一行代码
+			
+			Vue.component("counter-conc",{
+				template:"#counterConc",
+				// 组件中的数据是一个函数
+				data(){
+					return {
+						counter:0
+					}
+				},
+				methods:{
+					// 注意方法中获取data中的数据的时候需要使用this.变量名
+					add(){
+						this.counter++
+					},
+					sub(){
+						if(this.counter<=0){
+							counter = 0
+						}else{
+							this.counter--
+						}
+					}
+				
+				}
+				
+			})
+			
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: "this is my vue template",
+					active: "active"
+				}
+				
+				
+			})
+			
+		</script>
+	</body>
+</html>
+
+

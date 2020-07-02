@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>父子组件的注册</title>
+		<style>
+			.active{
+				color: #FF0000;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		<div id = "app">
+			<my-father-conc></my-father-conc>
+			<!-- 如果要直接使用子组件的内容，那么一定要在根组件也就是vue实例中注册子组件 -->
+			<my-son-conc></my-son-conc>
+		</div>
+		
+		
+		
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// crtl+shift+r复制一行代码
+			
+			// 1.创建组件构造器（子组件）
+			const sonConc = Vue.extend({
+				template:`
+					<div>
+						<h2>我是子组件标题</h2>
+						<p>我是子组件下的内容</p>
+					</div>
+				`
+			})
+			
+			// 2.创建组件构造器（父组件）
+			const fatherConc = Vue.extend({
+				// 在父组件中注册了子组件之后可以在模板中使用子组件
+				template:`
+					<div>
+						<h2>我是父组件标题</h2>
+						<p>我是父组件下的内容</p>
+						<my-son-conc></my-son-conc>
+					</div>
+				`,
+				// 在父组件下注册子组件
+				components:{
+					'my-son-conc':sonConc
+				}
+			})
+			
+			// vue实例可看作所有组件的root组件
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: "this is my vue template",
+					active: "active"
+				},
+				components:{
+					'my-father-conc':fatherConc,
+					// 可注册多个组件，使用之前必须在这里进行注册
+					'my-son-conc':sonConc,
+				}
+				
+				
+			})
+			
+		</script>
+	</body>
+</html>
+
+

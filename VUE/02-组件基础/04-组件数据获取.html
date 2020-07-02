@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>组件数据获取</title>
+		<style>
+			.active{
+				color: #FF0000;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		<div id = "app">
+			<my-conc></my-conc>
+		</div>
+		
+		<!-- 组件模板 -->
+		<template id="myConc"> 
+			<div>
+				<h2>{{concTitle}}</h2>
+			</div>
+			
+		</template>
+		
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// crtl+shift+r复制一行代码
+			
+			// 如果定义一个供组件内共享的全局变量，那么调用此组件的各个地方数据就会相互干扰，相应的组件data属性内返回的就是这个全局变量
+			// const shareData = {
+			// 	concTitle:"我是组件的标题"
+			// }
+			
+			//注册组件 
+			Vue.component("my-conc",{
+				
+				template:"#myConc",
+				/**
+				 *   vue中为了防止复用组件数据之间相互发生干扰，所以利用了js中函数有块级作用域的特点，返回的数据必须需要通过函数来返回一个对象， 
+				 * 否则就会出现组件中的数据相互干扰的情况，如果要想组件间的数据相互干扰，可以在组件内定义一个供组件共享的全局变量
+				 */
+				data(){
+					// 正确写法
+					return {
+						concTitle:"我是组件的标题"
+					}
+					
+					// 可以让组件调用的位置相互影响的写法
+					return shareData;
+				},
+				// 组件中也可以定义自己内部使用的方法
+				methods:{
+					
+				}
+			})
+			
+			
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: "this is my vue template",
+					active: "active"
+				}
+				
+				
+			})
+			
+		</script>
+	</body>
+</html>
+
+

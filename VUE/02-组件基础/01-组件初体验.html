@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>组件初体验</title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<!-- 3.使用组件构造器 -->
+			<my-first-cop></my-first-cop>
+		</div>
+		
+		<!-- js代码 -->
+		<script src="../js/vue.js"></script>
+		<script type="text/javascript">
+			/**
+			 * 创建组件的三个步骤：
+			 *  1.创建组件构造器；
+			 *	2.注册组件（全局注册，局部注册）；
+			 * 		全局注册是直接使用Vue.component()方法进行注册
+			 *      局部注册是在vue实例内使用components属性进行注册（开发常用）
+			 *	3.使用组件
+			 */ 
+			
+			// 1.创建组件构造器:template后直接传入字符串
+			const compCons =  Vue.extend({
+				template:`
+					<div>
+						<h2>组件初体验</h2>
+						<p>感觉组件功能很强大</p>
+					</div>
+				`
+			})
+			
+			// 2.全局注册组件:两个参数第一个是后面用到组件时定义的标签名称，第二个是组件构造器的变量名
+			// Vue.component('my-first-cop',compCons);
+			
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message:`这是一个消息`
+				},
+				// 局部注册组件，可同时注册多个
+				components:{
+					'my-first-cop':compCons,
+				}
+			})
+			
+			
+			
+		</script>
+		
+		
+	</body>
+	
+	
+	
+	
+</html>

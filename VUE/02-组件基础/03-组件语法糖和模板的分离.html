@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>组件语法糖和模板的分离</title>
+		<style>
+			.active{
+				color: #FF0000;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		<div id = "app">
+			<my-conc></my-conc>
+		</div>
+		
+		<!-- 方式一:抽离template代码 -->
+		<!-- <script type="text/x-template" id="myConc">
+			<div>
+				<h2>组件模板的抽离</h2>
+				<p>这是组件的具体内容</p>
+			</div>
+		</script> -->
+		
+		<!-- 方式二：抽离template代码，使用<template>标签 -->
+		<template id="myConc">
+			<div>
+				<h2>组件模板的抽离</h2>
+				<p>这是组件的具体内容</p>
+			</div>
+		</template>
+		
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// crtl+shift+r复制一行代码
+			
+			// 1.创建组件构造器和注册组件放在一起:直接使用类似java中匿名内部类的方式是为组件的简便创建方式
+			Vue.component('my-conc',{
+				template:'#myConc'
+			})
+			
+			
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: "this is my vue template",
+					active: "active"
+				}
+				
+				
+			})
+			
+		</script>
+	</body>
+</html>
+
+
