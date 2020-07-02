@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Es5和Es6中的语法区别</title>
+	</head>
+	
+	
+	<body>
+		
+		<button >按钮一</button>
+		<button >按钮二</button>
+		<button >按钮三</button>
+		<button >按钮四</button>
+		<button >按钮五</button>
+		
+		<script>
+			// js中if和for没有块级作用域，function有作用域
+			// es5中var没有块级作用域，es6中let有块级作用域,所以遍历时使用var来修饰变量，每次点击传入的i都是最后一个索引，解决方式为使用函数闭包的方式来解决
+			var btns = document.getElementsByTagName("button");
+			// 情况一：ES5中不使用闭包
+			// for(var i = 0; i<btns.length;i++){
+			// 	btns[i].addEventListener('click',function(){
+			// 		console.log("第"+i+"个按钮被点击了");
+			// 	})
+			// }
+			
+			// 情况二：ES5中使用闭包来解决作用域问题,使用函数传入的那个i(括号中定义的i)
+			// for (var i = 0; i < btns.length; i++) {
+			// 	(function(num){
+			// 		btns[num].addEventListener('click',function(){
+			// 			console.log("第"+num+"个按钮被点击了");
+			// 		})
+			// 	})(i)
+			// }
+			
+			// 情况三：ES6中使用let来定义变量
+			for(let i = 0;i<btns.length;i++){
+				btns[i].addEventListener("click",function(){
+					console.log("第"+i+"个按钮被点击了!");
+				})
+				
+			}
+			
+			
+			
+		</script>
+	</body>
+</html>
+
+

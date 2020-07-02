@@ -1,0 +1,71 @@
+<pre>
+<h2>
+	1.学习vue技术的第一天
+	2.今天目标，熟悉各个标签，基本上手vue
+</h2>	
+</pre>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>first day</title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!-- 页面数据初始展示 -->
+		<!-- <div id="app">
+			{{name}}
+		</div> -->
+		
+		<!-- v-for标签做遍历 解析标签只能挨个解析，不能统一解析 -->
+		<ul id="app">
+			<li v-for="item in books">{{item}}</li>
+		</ul>
+		
+		<!-- v-on:click标签,用来做点击事件，语法糖@click -->
+		<!-- 按钮和数据展示要定义在同一个div内，否则无法展示 -->
+		<div id="app">
+			<h2>{{num}}</h2>
+			<!-- 直接在按钮上对数据进行操作 -->
+			<!-- <button type="button" v-on:click="num += 5">add</button> -->
+			<!-- <button type="button" v-on:click="num -= 5">sum</button> -->
+			
+			<!-- 通过方法操作数据 -->
+			<button type="button" @click="add">add++</button>
+			<button type="button" @click="sum">sum--</button>
+		</div>
+		
+		
+		
+		<script type="text/javascript">
+			// VUE对象里面可定义内容：1，el标签，申明对象名称；2：data，数据对象；3.方法对象
+			let vue = new Vue({
+				el:'#app',
+				data:{
+					name:"卢飞",
+					// books:[{"三国"},{"水浒"},{"红楼"},{"西游"}],
+					books:['三国','水浒','红楼','西游'],
+					num: 0
+				},
+				// 各个方法定义之间要用逗号分隔
+				methods:{
+					add: function(){
+						console.log("add方法被调用了"+this.num+"次");
+						this.num+=1
+					},
+					sum: function(){
+						console.log("sum方法被调用了"+this.num+"次");
+						this.num-=1
+					}
+					
+				}
+				
+			})
+			
+			
+		</script>
+		
+		
+	</body>
+</html>

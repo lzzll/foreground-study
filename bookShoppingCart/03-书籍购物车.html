@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>this base vue</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	
+	
+	<body>
+		<div id = "app">
+			<div  v-if="isExist">
+				<h2>书籍购物车</h2>
+				<table border="1" cellspacing="0" cellpadding="0">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>书籍名字</th>
+							<th>价格</th>
+							<th>数据数量</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(item,index) in books">
+							<td>{{index+1}}</td>
+							<td>{{item.name}}</td>
+							<td>{{item.price | showPrice(item.prices)}}</td>
+							<td>
+								<button type="button" @click="sub(index)" :disabled="item.count <=1">-</button>
+								{{item.count}}
+								<button type="button" @click="add(index)">+</button>
+							</td>
+							<td>
+								<button type="button" @click="remove(index)">移除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<h2 >总价格：{{totalPrice | showPrice(totalPrice)}}</h2>
+			</div>
+			
+			<div v-else class="empty">购物车为空</div>
+		</div>
+		
+		
+		
+		
+		<!-- 引入js代码 -->
+		<script src="../js/vue.js"></script>
+		<script src="main.js"></script>
+	</body>
+</html>
+
+

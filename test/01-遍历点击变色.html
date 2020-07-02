@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>遍历点击变色</title>
+		
+		<!-- 样式代码块 -->
+		<style>
+			.active{
+				color: red;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<!-- html代码 -->
+		<div id="app">
+			<ul>
+				<!-- 绑定class写法一：不使用v-bind标签绑定样式，直接写样式名称就可以 -->
+				<!-- <li v-for="(item,index) in persons" :key="index" class="active" @click="whenClick(index)">{{index}}--{{item}}</li> -->
+				<!-- 绑定class写法二：使用js代码中data定义的active值，需要使用v-bind标签绑定 -->
+				<!-- <li v-for="(item,index) in persons" :key="index" :class="active" @click="whenClick(index)">{{index}}--{{item}}</li> -->
+				<!-- 绑定class写法三：使用key-value对象进行绑定，需要使用布尔值来做判定 -->
+				<!-- <li v-for="(item,index) in persons" :key="index" :class="{active:isActive}" @click="whenClick(index)">{{index}}--{{item}}</li> -->
+				<!-- 绑定class写法四：使用方法返回需要绑定的参数字段和值 -->
+				<!-- <li v-for="(item,index) in persons" :key="index" :class="getClasses()" @click="whenClick(index)">{{index}}--{{item}}</li> -->
+				
+				
+				<!-- v-for标签使用时item放在前面，index放在后面,点击变色案例 -->
+				<li v-for="(item,index) in persons" :key="index" :class="{active:index===currentIndex}" @click="whenClick(index)">{{index}}--{{item}}</li>
+			</ul>
+		</div>
+		
+		<!-- js代码 -->
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			let vue = new Vue({
+				el: '#app',
+				data: {
+					persons: ["基拉大和","阿斯兰","卡嘉莉","拉克丝"],
+					active: "active",
+					isActive: true,
+					currentIndex: 0
+				},
+				methods: {
+					// 前面是key值不用使用this来获取data中的数据
+					getClasses(){
+						return {active:this.isActive};
+					},
+					
+					whenClick(index){
+						this.currentIndex=index;
+					}
+					
+				},
+				
+			})
+			
+			
+		</script>
+	</body>
+</html>

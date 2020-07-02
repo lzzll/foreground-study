@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-if和v-else的使用</title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 使用v-if标签 -->
+			<h2 v-if="score>=90">优秀</h2>
+			<h2 v-else-if="score>=60">及格</h2>
+			<h2 v-else>不及格</h2>
+			
+			<!-- 使用计算属性 -->
+			<h2>{{scoreClass}}</h2>
+		</div>
+		
+		<!-- 引入包的时候需要根据js的路径来引用 -->
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data:{
+					score: 95
+				},
+				// 计算属性
+				computed:{
+					scoreClass(){
+						let message = '';
+						if(this.score > 90){
+							message = '优秀';
+						}else if(this.score>60){
+							message = '及格';
+						}else{
+							message = '不及格';
+						}
+						return message;
+					}
+				}
+			
+			})
+		</script>
+	</body>
+</html>
