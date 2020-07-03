@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>切换变色组件</title>
+		<style>
+			.active{
+				color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="app" :class="{active:isActive}">
+			{{message}}
+		
+			<!-- 使用组件  -->
+			<my-change-color-cpnc></my-change-color-cpnc>
+		
+		</div>
+		
+		<template id="changeColor">
+			<div>
+				<ul>
+					<li v-for="(item,index) in movies " :key="index" :class="active:index===currentIndex" @click="clickColor(index)">{{index}}---{{item}}</li>
+				</ul>
+			</div>
+		</template>
+		
+		<script src="../js/vue.js"></script>
+		<script>
+			
+			Vue.component("my-change-color-cpnc",{
+				template:"#changeColor",
+				data(){
+					return {
+						currentIndex:0,
+						movies:["洛克昂","提耶利亚","萨那","阿里路亚"]
+					}
+				},
+				methods:{
+					clickColor(index){
+						this.currentIndex = index
+					}
+				}
+				
+			})
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message: "这是一个vue模板",
+					movies:["洛克昂","提耶利亚","萨那","阿里路亚"]
+			
+				},
+				components:{
+					
+				}
+				methods:{
+					isActive:true
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>
