@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-model绑定checkBox</title>
+		<style>
+			.active{
+				color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="app">
+			{{message}}
+			<h2>checkBox实现单选框效果</h2>
+			<label>
+				<input type="checkbox" id="agree" v-model="isAgree"/>是否同意
+			</label>
+			<div>选择同意或者不同意:{{isAgree}} </div>
+		
+		
+			<h2>checkBox实现多选双向绑定</h2>
+			<label :for="item" v-for="(item,index) in hobbies" :key="index" >
+				<input type="checkbox" name="hobby" :value="item" v-model="hobbies" :id="item"/>{{item}}
+			</label>
+			<div>你的爱好是:{{hobbies}}</div>
+		
+		</div>
+		
+		<script src="js/vue.js"></script>
+		<script>
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message: "这是一个vue模板",
+					isAgree:false,
+					hobbies:["看书","动漫","运动","爬山"]
+				},
+				methods:{
+					isActive:true
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>

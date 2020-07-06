@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-model</title>
+		<style>
+			.active{
+				color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<!-- 直接使用v-model实现双向绑定 -->
+		<!-- <div id="app">
+			<input type="text" v-model="message" >{{message}}</input>
+		</div> -->
+		
+		<!-- 使用v-bind和v-on实现双向绑定 -->
+		<!-- v-model相当于v-on和v-bind的结合，实现双向绑定 -->
+		<!-- <div id="app">
+			<input type="text" :value=message @input="changeMessage" >{{message}}</input>
+		</div> -->
+		
+		<!-- 单选表格的双向绑定 -->
+		<div id="app">
+			<label for="male">
+				<input type="radio" id="male" name="sex" value="男" v-model="sex"/>男
+			</label>
+			<label for="female">
+				<input type="radio" id="female" name="sex" value="女" v-model="sex"/>女
+			</label>
+			<div>你选择的性别是：{{sex}}</div>
+		</div>
+		
+		
+		<script src="js/vue.js"></script>
+		<script>
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message: "可以用v-model指令实现双向绑定",
+					sex:"男"
+				},
+				methods:{
+					changeMessage(event){
+						this.message=event.target.value
+					}
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>

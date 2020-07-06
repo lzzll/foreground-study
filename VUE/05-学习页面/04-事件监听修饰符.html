@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>基本vue模板</title>
+		<style>
+			.active{
+				color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div @click="divClick" id="app">
+			<!-- .stop-阻止本层的请求冒泡到上层 -->
+			<button type="button" @click.stop="btnClick">按钮一</button>
+			<!-- .prevent-阻止默认事件 -->
+			<button type="submit" @click.prevent.stop="submitClick">提交按钮</button>
+		</div>
+		<!-- 监测键盘点击事件 -->
+		<input type="text" @click.enter="keyup" placeholder="请输入文本">
+		<script src="js/vue.js"></script>
+		<script>
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message: "这是一个vue模板"
+				},
+				methods:{
+					divClick(){
+						console.log("div被点击了!");
+					},
+					btnClick(){
+						console.log("btn被点击了!");
+					},
+					submitClick(){
+						console.log("阻止提交方法被调用了!");
+					},
+					keyup(){
+						console.log("enter按钮被点击了!");
+					},
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>

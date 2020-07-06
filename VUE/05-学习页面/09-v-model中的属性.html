@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>基本vue模板</title>
+		<style>
+			.active{
+				color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="app">
+			<!-- .lazy修饰符-可以实现延迟更新,鼠标失焦或者点击enter键时更新 -->
+			<input type="text" v-model.lazy="name" />
+			<div>name:{{name}}</div>
+		
+			<!-- .number修饰符-将绑定的age属性从字符串改成number  -->
+			<input type="text" v-model.number="age" />
+			<div>name:{{age}}--{{typeof age}}</div>
+			
+			<!-- .trim修饰符-去掉输入框前后的空格  -->
+			<input type="text" v-model.trim="sex" />
+			<div>sex:{{sex}}</div>
+		
+		</div>
+		
+		<script src="js/vue.js"></script>
+		<script>
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					name:"jack",
+					age:18,
+					sex:"male"
+				},
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>
