@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>父子组件通信-子传父-emit</title>
+		<style>
+			.active{
+				color: #FF0000;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		<div id = "app">
+			<sonconc @itemclick="cpnClick"></sonconc>
+		</div>
+		
+		
+		<template id="sonconc">
+			<div>
+				<button  v-for="item in categories" @click="btnClick(item)">{{item.name}}</button>
+			</div>
+		</template>
+		
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// crtl+shift+r复制一行代码
+			
+			const sonconc = {
+				template:"#sonconc",
+				data(){
+					return {
+						categories:[
+							{id:1,name:"手机数码"},
+							{id:2,name:"衣服鞋帽"},
+							{id:3,name:"运动户外"},
+						]
+					}
+				},
+				methods:{
+					btnClick(item){
+						this.$emit("itemclick",item)
+					}
+				}
+			};
+			
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: "this is my vue template",
+					active: "active"
+				},
+				methods:{
+					cpnClick(item){
+						console.log('cpnClick---'+item.name);
+					}
+				},
+				components:{
+					// 写法一:直接注册组件
+					sonconc
+					
+					// 写法二:使用增强字面量写法
+					// sonconc:{
+					// 	template:"#sonconc",
+					// 	data(){
+					// 		return {
+					// 			categories:[
+					// 				{id:1,name:"手机数码"},
+					// 				{id:2,name:"衣服鞋帽"},
+					// 				{id:3,name:"运动户外"}
+					// 			]
+					// 		}
+					// 	},
+					// 	methods:{
+					// 		pass-to-father(item){
+					// 			return this.$emit("passMessage",itme)
+					// 		}
+					// 	}
+						
+					// }
+				},
+				
+				
+			})
+			
+		</script>
+	</body>
+</html>
+
+

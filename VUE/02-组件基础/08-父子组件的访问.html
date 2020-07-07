@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>父子组件的访问</title>
+		<style>
+			.active{
+				color: #FF0000;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		<div id = "app">
+			<cpn ref="aaa"></cpn>
+			<button @click="getSonMessage">访问子组件</button>
+		</div>
+		
+		<template id="cpn">
+			<div>{{message}}</div>
+		</template>
+		
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// crtl+shift+r复制一行代码
+			/**
+			 * 父子组件的相互访问：
+			 * 		父组件访问子组件方法/属性，$children或者$refs
+			 * $children---可以获取父组件下调用的所有子组件，获取的是一个组件数组，可以通过数组下标来调用，不常用，不利于代码的迭代
+			 * $refs---可以通过在子组件上面定义ref属性（相当于id属性），然后使用时通过this.$refs.ref属性名来获取对应的子组件，此方式比较常用
+			 * 		子组件访问父组件，$parent或者$root
+			 * $parent--访问子组件的父组件，少用，不利于子组件的复用
+			 * $root---访问最根级的vue实例，少用
+			 * 
+			 */
+			
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: "this is my vue template",
+					active: "active"
+				},
+				methods:{
+					getSonMessage(){
+						// 通过$children访问子组件信息（不常用）
+						// console.log(this.$children[0].message);
+						// 通过$refs访问子组件信息（常用）
+						console.log(this.$refs.aaa.message);
+					}
+				},
+				components:{
+					cpn:{
+						template:"#cpn",
+						data(){
+							return {
+								message:"子组件"
+							}
+						},
+						methods:{
+							
+						}
+					}
+					
+				}
+				
+				
+			})
+			
+		</script>
+	</body>
+</html>
+
+

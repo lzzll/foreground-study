@@ -11,18 +11,21 @@
 	</head>
 	<body>
 		
-		<div id="app" :class="{active:isActive}">
+		<div id="app">
 			{{message}}
 		
 			<!-- 使用组件  -->
-			<my-change-color-cpnc></my-change-color-cpnc>
+			<my-change-color-cpnc :cmovies="movies" :cactive="isActive"></my-change-color-cpnc>
 		
 		</div>
 		
-		<template id="changeColor">
+		<template id="changecolor">
 			<div>
+				{{cactive}}
+				{{currentIndex}}
 				<ul>
-					<li v-for="(item,index) in movies " :key="index" :class="active:index===currentIndex" @click="clickColor(index)">{{index}}---{{item}}</li>
+					<!-- <li v-for="(item,index) in cmovies">{{index}}---{{item}}</li> -->
+					<li v-for="(item,index) in cmovies " :key="index" @click="clickColor(index)">{{index}}---{{item}}</li>
 				</ul>
 			</div>
 		</template>
@@ -31,16 +34,33 @@
 		<script>
 			
 			Vue.component("my-change-color-cpnc",{
-				template:"#changeColor",
+				template:"#changecolor",
+				props:{
+					cmovies:{
+						type:Array,
+						default(){
+							return ["基拉","阿斯兰"]
+						}
+					},
+					cactive:{
+						type:Boolean
+					}
+				},
 				data(){
 					return {
-						currentIndex:0,
-						movies:["洛克昂","提耶利亚","萨那","阿里路亚"]
+						currentIndex:0
 					}
 				},
 				methods:{
 					clickColor(index){
-						this.currentIndex = index
+						this.currentIndex=index
+						// if(this.currentIndex = index){
+						// 	this.cactive = true
+						// 	this.currentIndex=index
+						// }else{
+						// 	this.cactive = false
+						// }
+						
 					}
 				}
 				
@@ -50,14 +70,9 @@
 				el:"#app",
 				data:{
 					message: "这是一个vue模板",
-					movies:["洛克昂","提耶利亚","萨那","阿里路亚"]
-			
-				},
-				components:{
-					my-change-color-cpnc:"my-change-color-cpnc"
-				}
-				methods:{
+					movies:["洛克昂","提耶利亚","萨那","阿里路亚"],
 					isActive:true
+			
 				}
 			})
 			

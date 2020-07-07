@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>父子组件之间的通信</title>
+		<style>
+			.active{
+				color: #FF0000;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		<!-- html代码 -->
+		<div id = "app">
+			{{message}}
+			<!-- 计算属性 -->
+			{{name}}
+			<!-- <cpn :cmessage="message" :cmovies="movies"></cpn> -->
+			<cpn :cmessage="message" :cperson="person"></cpn>
+			<!-- 如果在模板中要使用驼峰写法,使用v-bind绑定的时候需要使用短杠分隔 -->
+			<!-- <cpn :c-message="message" :c-person="person"></cpn> -->
+		</div>
+		
+		<!-- 组件模板代码 -->
+		<template id="cpn">
+			<div>
+				<h2>{{cmessage}}</h2>
+				<div>
+					<ul>
+						<li v-for="(item,index) in cmovies">{{item}}</li>
+					</ul>
+				</div>
+				<h2>{{cperson.firstName}}--{{cperson.lastName}}</h2>
+				<!-- 子组件内使用计算属性 -->
+				<h2>{{name}}</h2>
+			</div>
+		</template>
+		
+		
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// crtl+shift+r复制一行代码
+			// 普通注册组件的方法
+			// const cpn = {
+			// 	template:"#cpn",
+			// 	props:["cmovies","cmessage"],
+			// 	data(){
+			// 		return{
+						
+			// 		}
+			// 	}
+			// }
+			
+			// 自定义类型
+			function Person(firstName,lastName){
+				this.firstName = firstName,
+				this.lastName=lastName
+			}
+			
+			
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: "this is my vue template",
+					movies:["洛克昂","提耶利亚","萨那","阿里路亚"],
+					// 绑定自定义类型写法
+					person:new Person("卡嘉莉","拉克丝")
+				},
+				computed:{
+					name(){
+						return this.person.firstName+"--"+this.person.lastName
+					}
+				},
+				components:{
+					// 普通注册组件的方法
+					// cpn
+					
+					// 使用增强字面量写法
+					cpn:{
+						template:"#cpn",
+						// 父组件向子组件传递数据用props属性，此属性有三种写法
+						// 第一种：返回html中使用的变量名组成的数组
+						// props:["cmovies","cmessage"],
+						
+						// 第二种：返回自定义的对象,可以限制各个变量的类型
+						// props:{
+						// 	cmovies:Array,
+						// 	cmessage:String
+						// },
+						
+						// 第二种增强写法：可以给每个变量名单独赋值类型、是否必传、默认值等属性
+						props:{
+							cmessage:{
+								// 指定类型
+								type:String,
+								// 是否必传
+								required:true,
+								// 子组件默认值
+								dafault:"我是子组件默认值"
+							},
+							cmovies:{
+								type:Array,
+								required:false,
+								// 如果指定的类型是Array/Object，那么默认值必须采用函数的方法
+								default(){
+									return ["基拉","阿斯兰"]
+								}
+							},
+							cperson:{
+								type:Person
+							},
+							
+							// 自定义验证函数（验证传入属性的类型或者值）
+							// vaildator: function (value) {
+							//   //这个传递的值必须匹配下列字符串中的一个
+							//   return ['zzzzz', 'ttttt', 'yyy'].indexOf(value) !== -1
+							// }
+							
+							
+						},
+						// 向子组件传递数据的时候，组件中的data属性一定要return出去
+						data(){
+							return{
+								
+							}
+						},
+						// 组件内定义计算属性
+						computed:{
+							name(){
+								return this.cperson.firstName+"-"+this.cperson.lastName
+							}
+						}
+					}
+				}
+				
+				
+			})
+			
+		</script>
+	</body>
+</html>
+
+

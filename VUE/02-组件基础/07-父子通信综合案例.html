@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>父子通信案例</title>
+	</head>
+	
+	
+	<body>
+		
+		<!-- html代码 -->
+		<div id = "app">
+			<h1>father数字1:{{num1}}</h1>
+			<h2>father数字2:{{num2}}</h2>
+			<sonconc 
+				:number1="num1" 
+				:number2="num2" 
+				@changenum1="changeFatherNum1"
+				@changenum2="changeFatherNum2"
+			/>
+		</div>
+		
+		<!-- 子组件模板 -->
+		<template id="sonconc">
+			<div>
+				<h1>son数字1:{{number1}}</h1>
+				<input type="text" :value="number1" @input="changeDnumber1"/>
+				<h2>son数字2:{{number2}}</h2>
+				<input type="text" :value="number2" @input="changeDnumber2"/>
+			</div>
+		</template>
+		
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// crtl+shift+r复制一行代码
+			/**
+			 * 案例需求：
+			 * 	 1.父组件中定义两个数字，将两个数字展示到子组件中；
+			 * 	 2.子组件中修改数字的同时，父子组件中的数字也要跟着发生改变；
+			 *   3.子组件中修改数字1，父子组件中的数字2永远为数字1的100倍，子组件中修改数字2，父子组件中的数字1永远是数字2的百分之一；
+			 */
+			
+			let app = new Vue({
+				el: '#app',
+				data: {
+					num1:1,
+					num2:0
+				},
+				methods:{
+					changeFatherNum1(num1){
+						// 1.修改父组件中的num1
+						this.num1=parseFloat(num1);
+					},
+					changeFatherNum2(num2){
+						// 修改父组件中的num2
+						this.num2=parseFloat(num2);
+					}
+				},
+				components:{
+					sonconc:{
+						template:"#sonconc",
+						props:{
+							number1:Number,
+							number2:Number
+						},
+						// 子组件中定义的数据必须通过return返回，不能直接修改number1的数据，这样会导致数据异常，重新定义一个数据进行赋值
+						data(){
+							return{
+								dnumber1:this.number1,
+								dnumber2:this.number2
+							}
+						},
+						methods:{
+							changeDnumber1(event){
+								// 1.修改子组件中重新定义的数据
+								this.dnumber1 = event.target.value
+								// 2.通过$emit修改父组件中的num1和num2
+								this.$emit("changenum1",this.dnumber1);
+								// 3.修改父组件中的num2为num1的100倍
+								this.$emit("changenum2",this.dnumber1*100);
+				
+							},
+							changeDnumber2(event){
+								this.dnumber2 = event.target.value;
+								this.$emit("changenum2",this.dnumber2);
+								this.$emit("changenum1",this.dnumber2/100);
+							},
+						}
+						
+						
+					}
+				}
+				
+				
+			})
+			
+		</script>
+	</body>
+</html>
+
+
