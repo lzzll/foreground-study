@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>作用域插槽</title>
+		<style>
+			.active{
+				color: #FF0000;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		<div id = "app">
+			<!-- 1.直接使用组件,未在父组件上指定样式 -->
+			<cpn></cpn>
+			<!-- 2.使用组件中定义的数据,在父组件上指定样式,将数据以短横线分隔 -->
+			<cpn>
+				<template slot-scope="slot">{{slot.passdata.join("-")}}</template>
+			</cpn>
+			<!-- 2.使用组件中定义的数据,在父组件上指定样式,将数据以*号分隔 -->
+			<cpn>
+				<template slot-scope="slot">{{slot.passdata.join("*")}}</template>
+			</cpn>
+		</div>
+		
+		<template id="cpn">
+			<div>
+				<slot  :passdata="comics">
+					<ul>
+						<li v-for="item in comics">{{item}}</li>
+					</ul>
+				</slot>
+			</div>
+		</template>
+		
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// crtl+shift+r复制一行代码
+			/**
+			 * 作用域插槽的使用
+			 * 	   1.在子组件中定义默认数据;
+			 * 	   2.在需要使用子组件默认数据的位置使用<slot>插槽进行包裹，并在上面绑定子组件中定义的数据，变量名可自取（此案例中作者使用passsdata）
+			 *     3.在使用此组件的位置必须定义template标签(vue2.5版本之后不强制使用<template标签>)；
+			 * 	   4.在标签上添加slot-scope="slot"的固定写法表示需要获取子组件中的默认数据；
+			 * 	   5.通过”slot.子组件中变量名“的形式获取子组件传给插槽的默认值；
+			 * 作用域插槽的实质：
+			 * 	   父组件替换插槽的标签，但是内容由子组件来提供
+			 * 
+			 */
+			
+			
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: "this is my vue template",
+					active: "active"
+				},
+				components:{
+					cpn:{
+						template:"#cpn",
+						data(){
+							return{
+								comics:['火影','海贼','死神','高达'],
+							}
+						}
+						
+						
+					}
+					
+				}
+				
+				
+			})
+			
+		</script>
+	</body>
+</html>
+
+

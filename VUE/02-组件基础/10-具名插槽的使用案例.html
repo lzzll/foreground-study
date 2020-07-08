@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>具名插槽的使用</title>
+		<style>
+			.active{
+				color: #FF0000;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		<div id = "app">
+			<!-- 1.直接使用组件，不替换具体插槽内容 -->
+			<cpn></cpn>
+			<!-- 2.替换指定插槽内容,在指定替换的标签中添加slot属性，属性值对应到组件中定义的插槽的name值上即可，
+					如果未指定替换插槽，那么将替换所有未具名的插槽 -->
+			<cpn>
+				<h2 slot="left">替换左边插槽内容</h2>
+				<h2 slot="left">第二条替换内容</h2>
+			</cpn>
+		</div>
+		
+		<template id="cpn">
+			<div>
+				<slot name="left">左边插槽</slot>
+				<slot name="center">中间插槽</slot>
+				<slot name="right">右边插槽</slot>
+				<slot>不具名插槽</slot>
+			</div>
+		</template>
+		
+		
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// crtl+shift+r复制一行代码
+			/**
+			 * 具名插槽的使用语法：
+			 * 	1.定义一个具名插槽，在slot标签上面使用name属性指定具体的插槽名字；
+			 *  2.在使用的地方通过slot属性指定插槽name属性上指定的名字来表示替换具体的位置；
+			 * 		可以同时用多个内容来替换同一个插槽上的内容
+			 */
+			
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: "this is my vue template",
+					active: "active"
+				},
+				components:{
+					cpn:{
+						template:"#cpn"
+					}
+					
+					
+				}
+				
+				
+			})
+			
+		</script>
+	</body>
+</html>
+
+

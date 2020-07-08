@@ -30,3 +30,24 @@ vue学习思路：
 		组件的父子传值
 			* 父组件向子组件传值 props属性
 			* 子组件向父组件传值 必须通过函数$emit("定义在vue实例中的方法名",方法参数)
+		父子组件的访问
+			* 父组件可以通过$children或者$refs来访问子组件中的属性和方法,通过$refs的方式可以具名访问，使用较多；
+			* 子组件可以通过$parent或者$root的方式来访问父组件中的属性和方法,不符合组件定义是为了解耦的初衷，使用较少
+		插槽的定义与使用
+			* 通过<slot>标签在组件中增加插槽，插槽一般都是使用具名插槽的方式来使用
+			* 可以使用作用域插槽:使用父组件中的标签，而数据则由子组件来提供
+	4.模块化开发
+		模块化的核心：导出和导入
+		常用的模块化语法：
+			ES6--直接可以使用在浏览器上面
+				语法 export {} 或者export default {} 
+			commonJS--需要依赖于webpack
+		webpack的介绍
+			* webpack是一个前端项目的模块化打包工具，类似于idea中集成的将项目打war包的工具
+			* webpack的使用必须依赖于node.js
+			  webpack -version 查看webpack的版本号
+			* node.js中有个非常中要的工具npm，可以用来对webpack进行安装
+			  node -v 查看node的版本号
+			  安装命令为 npm install webpack@版本号 -g  表示全局安装指定版本的webpack工具
+			
+			

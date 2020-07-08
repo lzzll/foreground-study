@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>slot标签的基本使用</title>
+		<style>
+			.active{
+				color: #FF0000;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		<div id = "app">
+			<!-- 直接使用子组件，不像子组件中传值取代默认值 -->
+			<cpn></cpn>
+			<!-- 向插槽中传值取代默认值 -->
+			<cpn><p>传入进来取代默认值的</p></cpn>
+			<!-- 可以往插槽中传入多个标签内容进行取代 -->
+			<cpn>
+				<p>取代默认值2</p>
+				<button>按钮</button>
+				<input type="text" placeholder="文本输入框" />
+			</cpn>
+			
+			
+		</div>
+		
+		<template id="cpn">
+			<div>
+				<h2>子组件标题</h2>
+				<p>子组件正文</p>
+				<slot><p>插槽默认值</p></slot>
+			</div>
+			
+		</template>
+		
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// crtl+shift+r复制一行代码
+			/**
+			 * 插槽slot的基本使用
+			 *   一、在子组件模板中通过<slot></slot>预留一个插槽，其中可以给默认标签元素;
+			 * 	 二、如果不是具名插槽，可以往插槽中插入多个标签内容，会统一进行替换
+			 */
+			
+			
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: "this is my vue template",
+					active: "active"
+				},
+				components:{
+					cpn:{
+						template:"#cpn",
+					}
+				}
+			})
+			
+		</script>
+	</body>
+</html>
+
+
