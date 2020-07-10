@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>登录方式切换组件</title>
+		<style>
+			.active{
+				color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="app">
+			<cpn></cpn>
+			<cpn></cpn>
+		</div>
+		
+		<template id="cpn">
+			<div>
+				<h2>点击登录切换</h2>
+				<input type="text" placeholder="邮箱登录" v-show="isShow"/>
+				<input type="text" placeholder="手机号登录" v-show="!isShow"/>
+				<button @click="changeStyle">点击切换</button>
+			</div>
+		</template>
+		
+		
+		<script src="../js/vue.js"></script>
+		<script>
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message: "这是一个vue模板"
+				},
+				components:{
+					cpn:{
+						template:"#cpn",
+						data(){
+							return {
+								isShow:true
+							}
+						},
+						methods:{
+							changeStyle(){
+								console.log(this.isShow);
+								this.isShow = !this.isShow
+							}
+						}
+					},
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>

@@ -24,6 +24,8 @@
 				<button>按钮</button>
 				<input type="text" placeholder="文本输入框" />
 			</cpn>
+			<!-- 通过父子组件通信传值取代 -->
+			<cpn :passvalue="message"></cpn>
 			
 			
 		</div>
@@ -32,7 +34,7 @@
 			<div>
 				<h2>子组件标题</h2>
 				<p>子组件正文</p>
-				<slot><p>插槽默认值</p></slot>
+				<slot><p>{{passvalue}}</p></slot>
 			</div>
 			
 		</template>
@@ -56,6 +58,17 @@
 				components:{
 					cpn:{
 						template:"#cpn",
+						props:{
+							passvalue:{
+								type:String,
+								default:"默认值"
+							}
+						},
+						data(){
+							return {
+								defaultValue: "插槽默认值"
+							}
+						}
 					}
 				}
 			})

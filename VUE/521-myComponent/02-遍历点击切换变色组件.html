@@ -14,18 +14,20 @@
 		<div id="app">
 			{{message}}
 		
-			<!-- 使用组件  -->
-			<my-change-color-cpnc :cmovies="movies" :cactive="isActive"></my-change-color-cpnc>
+			<!-- 直接通过默认值使用组件 -->
+			<my-change-color-cpnc></my-change-color-cpnc>
+			<!-- 传值使用组件  -->
+			<my-change-color-cpnc :cmovies="movies"></my-change-color-cpnc>
 		
 		</div>
 		
 		<template id="changecolor">
 			<div>
-				{{cactive}}
-				{{currentIndex}}
 				<ul>
 					<!-- <li v-for="(item,index) in cmovies">{{index}}---{{item}}</li> -->
-					<li v-for="(item,index) in cmovies " :key="index" @click="clickColor(index)">{{index}}---{{item}}</li>
+					<li v-for="(item,index) in cmovies "
+					 :class="{active:index===currentIndex}"   
+					 :key="index" @click="clickColor(index)">{{index}}---{{item}}</li>
 				</ul>
 			</div>
 		</template>
@@ -41,9 +43,6 @@
 						default(){
 							return ["基拉","阿斯兰"]
 						}
-					},
-					cactive:{
-						type:Boolean
 					}
 				},
 				data(){
@@ -54,13 +53,6 @@
 				methods:{
 					clickColor(index){
 						this.currentIndex=index
-						// if(this.currentIndex = index){
-						// 	this.cactive = true
-						// 	this.currentIndex=index
-						// }else{
-						// 	this.cactive = false
-						// }
-						
 					}
 				}
 				
@@ -72,7 +64,6 @@
 					message: "这是一个vue模板",
 					movies:["洛克昂","提耶利亚","萨那","阿里路亚"],
 					isActive:true
-			
 				}
 			})
 			

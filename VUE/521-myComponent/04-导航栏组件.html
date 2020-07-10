@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>导航栏组件</title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<div>
+				<!-- 直接使用导航栏 -->
+				<!-- <cpn></cpn> -->
+				<!-- 传值使用导航栏中的插槽 -->
+				<!-- <cpn :companyimg="imgurl"></cpn> -->
+				<!-- 直接替代导航栏中的插槽 -->
+				<cpn :searchcontent="message">
+					<div slot="left">
+						<h2>我替换了导航栏左边插槽</h2>
+					</div>
+					<div slot="right">
+						<img :src="imgurl">
+					</div>
+				</cpn>
+			</div>
+		</div>
+		
+		<template id="cpn">
+			<div>
+				<slot name="left">
+					<span>左边插槽,放logo</span>
+					<img :src="companyimg"/>
+				</slot>
+				<slot name="center">
+					<span>中间插槽,放搜索栏</span>
+					<input type="text" placeholder="searchcontent" v-model="content"/>
+				</slot>
+				<slot name="right">
+					<span>右边插槽,放一个按钮</span>
+					<button @click="search(content)">搜索</button>
+				</slot>
+			</div>
+		</template>
+		
+		<script src="../js/vue.js"></script>
+		<script>
+			
+			/**
+			 * 使用插槽的两种方式：
+			 * 		一、可以使用props属性向子组件中传值,还是使用子组件中的标签结构;
+			 * 		二、通过slot属性来替换插槽中的标签和数据，具名插槽写法; 不能使用v-slot属性
+			 * 		三、父组件向子组件中传的值不能被子组件中做双向绑定来修改,必须在子组件中再定义一个变量,将父组件中的值传给该变量,然后用该变量来做双向绑定;
+			 * 		四、图片标签的使用不能直接使用src属性来绑定url,需要使用v-bind:src来绑定属性值;
+			 */
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message: "这是一个vue模板",
+					imgurl:"https://www.easyicon.net/api/resizeApi.php?id=524926&size=128",
+				},
+				components:{
+					cpn:{
+						template:"#cpn",
+						props:{
+							/* 定义父子组件传值的变量名时尽量使用小写，使用驼峰可能出现问题 */
+							companyimg:{
+								type:String,
+								default:"https://www.easyicon.net/api/resizeApi.php?id=524378&size=128"
+							},
+							searchcontent:{
+								type:String,
+								default: "家用电器"
+							}
+						},
+						methods:{
+							search(content){
+								console.log(content)
+							},
+						},
+						data(){
+							return{
+								content:this.searchcontent
+							}
+						}
+					}
+				},
+			})
+		</script>
+		
+	</body>
+</html>
