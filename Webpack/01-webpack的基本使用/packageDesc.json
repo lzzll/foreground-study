@@ -1,0 +1,17 @@
+{
+  "name": "nodedepoloy",   // nodeb包名字
+  "version": "1.0.0",  // 版本
+  "description": "",  // 描述
+  "main": "webpack.config.js",  // 对应的webpack的配置文件
+  "scripts": {  // npm下的脚本配置，可以使用npm run "test"/"build"直接执行后面配置的命令，并且优先采用本地安装的webpack版本
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {   // 本地安装的webpack版本后会出现的开发环境的依赖（除了webpack还有其它的依赖包）
+	"css-loader": "^3.6.0",
+	"style-loader": "^1.2.1",
+    "webpack": "^3.6.0"
+  }
+}
