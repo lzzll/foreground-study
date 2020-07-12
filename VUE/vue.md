@@ -40,14 +40,11 @@ vue学习思路：
 		模块化的核心：导出和导入
 		常用的模块化语法：
 			ES6--直接可以使用在浏览器上面
-				语法 export {} 或者export default {} 
+				导出语法 export {} 或者 export default {} 
+				导入语法 import info from "./es6Style.js";
 			commonJS--需要依赖于webpack
-		webpack的介绍
-			* webpack是一个前端项目的模块化打包工具，类似于idea中集成的将项目打war包的工具
-			* webpack的使用必须依赖于node.js
-			  webpack -version 查看webpack的版本号
-			* node.js中有个非常中要的工具npm，可以用来对webpack进行安装
-			  node -v 查看node的版本号
-			  安装命令为 npm install webpack@版本号 -g  表示全局安装指定版本的webpack工具
-			
-			
+				导出语法 module.exports = {"",""}
+				导入语法 const {add,red} = require("./mathUtil.js")
+	5.webpack中安装vue的loader的使用步骤
+		1.安装vue   npm install vue --save
+			* 使用--save-dev表示只在开发的时候才会有依赖,此处安装vue在开发和打包部署运行时都会用到,所以只能使用--save
