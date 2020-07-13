@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>基本vue模板</title>
+		<style>
+			.active{
+				color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="app">
+			<cpn></cpn>
+		</div>
+		
+		<template id="cpn">
+			<div>
+				<label>ID
+					<input type="text" v-model="cId" />
+				</label>
+				<label>Name
+					<input type="text" v-model="cName" />
+				</label>
+				<input type="button" value="添加" @click="addToArray"></button>
+				
+				<br />
+				<ul>
+					<li v-for="(item,index) in cList" :class="{active:index===currentIndex}" @click="changeColor(index)" >{{item.id}}---{{item.name}}</li>
+				</ul>
+			</div>
+		</template>
+		
+		<script src="../js/vue.js"></script>
+		<script>
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message: "这是一个vue模板"
+				},
+				components:{
+					cpn:{
+						template:"#cpn",
+						props:{
+							sonId:{
+								type:Number,
+								required:false
+							},
+							sonName:{
+								type:String,
+								required:false
+							},
+						},
+						data(){
+							return{
+								cId:this.sonId,
+								cName:this.sonName,
+								currentIndex:0,
+								cList:[
+									{id:1,name:"火影"},
+									{id:2,name:"海贼"},
+									{id:3,name:"柯南"},
+									{id:4,name:"死神"},
+								]
+							}
+						},
+						methods:{
+							addToArray(){
+								this.cList.push({id:this.cId,name:this.cName});
+							},
+							changeColor(index){
+								this.currentIndex = index;
+							}
+						}
+					}
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>

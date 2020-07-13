@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>基本vue模板</title>
+		<style>
+			.active{
+				color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="app" :class="{active:isActive}">
+			{{message}}
+			<br/>
+			<input type="button" value="move" @click="move"/>
+			<input type="button" value="stop" @click="stop"/>
+		
+		</div>
+		
+		
+		<script src="../js/vue.js"></script>
+		<script>
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message: "君不见黄河之水天上来，奔流到海不复回",
+					isActive: false,
+					intervalId:null
+				},
+				methods:{
+					move(){
+						if(this.intervalId) return;
+						// 箭头函数写法
+						this.intervalId = setInterval(()=>{
+							var start = this.message.substring(0,1)
+							var end = this.message.substring(1)
+							this.message = end + start
+							console.log(start.indexOf(this.message))
+							this.isActive = true
+						},400)
+						
+						// 直接使用function写法,无法执行
+						// this.intervalId = setInterval(function(){
+						// 	var start = this.message.substring(0,1)
+						// 	var end = this.message.substring(1)
+						// 	this.message = end + start
+						// },400)
+						
+					},
+					stop(){
+						clearInterval(this.intervalId)
+						this.intervalId = null
+						this.isActive = false
+					}
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>

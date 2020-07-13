@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计算器组件</title>
+		<style>
+			.active{
+				color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		
+		
+		<div id="app">
+			{{message}}
+			<br/>
+			<cpn></cpn>
+		</div>
+		
+		<template id="caculate">
+			<div>
+				<input type="text" v-model="cnum1" placeholder="cnum1">{{cnum1}}</input>
+				<select v-model="coprator">
+					<option value="+">+</option>
+					<option value="-">-</option>
+					<option value="*">*</option>
+					<option value="/">/</option>
+				</select>
+				<input type="text" v-model="cnum2">{{cnum2}}</input>
+				<input type="button" @click="cacula" value="=" /></input>
+				<input type="text" :value="cresult">{{cresult}}</input>
+				
+			</div>
+		</template>
+		
+		<script src="../js/vue.js"></script>
+		<script>
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message: "这是一个vue模板"
+				},
+				components:{
+					cpn:{
+						template:"#caculate",
+						props:{
+							num1:{
+								type:Number,
+								required:false,
+								default:0
+							},
+							num2:{
+								type:Number,
+								required:false,
+								default:0
+							},
+							// oprator:'-',
+							oprator:{
+								type:String,
+								required:false,
+								default:'-'
+							},
+						},
+						data(){
+							return {
+								cnum1:this.num1,
+								cnum2:this.num2,
+								// coprator:'-',
+								coprator:this.oprator,
+								cresult:0,
+							}	
+						},
+						methods:{
+							cacula(){
+								/* 方式一 */
+								// switch(this.coprator){
+								// 	case "+":
+								// 		this.cresult = parseFloat(this.cnum1)+parseFloat(this.cnum2)
+								// 		break;
+								// 	case "-":
+								// 		this.cresult = parseFloat(this.cnum1)-parseFloat(this.cnum2);
+								// 		break;
+								// 	case "*":
+								// 		this.cresult = parseFloat(this.cnum1)*parseFloat(this.cnum2);
+								// 		break;
+								// 	case "/":
+								// 		this.cresult = parseFloat(this.cnum1)/parseFloat(this.cnum2);
+								// 		break;
+								// }
+								
+								/* 方式二 */
+								var caluStr = parseFloat(this.cnum1) + this.coprator + parseFloat(this.cnum2);
+								alert(caluStr);
+								this.cresult = eval(caluStr)
+								
+							}
+						}
+						
+						
+					}
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>
