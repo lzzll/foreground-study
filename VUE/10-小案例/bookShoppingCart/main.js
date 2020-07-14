@@ -1,6 +1,10 @@
 const app = new Vue({
 	el: '#app',
 	data: {
+		name:"",
+		price:"",
+		count:"",
+		searchWords:"",
 		books: [
 			{
 				id:1,
@@ -42,6 +46,25 @@ const app = new Vue({
 				this.isExist=false
 			}
 		},
+		addToList(){
+			let length = this.books.length;
+			let book = {id:length+1,name:this.name,price:parseFloat(this.price),count:parseFloat(this.count)};
+			// unshift是从数组开头插入
+			// this.books.unshift(book);
+			// push是从队尾插入
+			this.books.push(book);
+		},
+		searchList(searchWords){
+			// alert("搜索方法调用了,方法参数"+searchWords)
+			// let value = event.target.value;
+			let newList = this.books.filter(item=>{
+				if(item.name.includes(searchWords)){
+					return item;
+				}
+			})
+			return newList;
+		}
+		
 	},
 	computed:{
 		   totalPrice(){
