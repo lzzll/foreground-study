@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>基本vue模板</title>
+		<style>
+			.active{
+				color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="app" :class="{active:isActive}">
+			{{message}}
+			<br/>
+			<comment :is="componentName"></comment>
+			<br/>
+			<input type="button" value="登录" @click="componentName='login'" />
+			<input type="button" value="注册" @click="componentName='signup'" />
+		</div>
+		
+		<template id="login">
+			<div>
+				{{loginmsg}}
+			</div>
+		</template>
+		
+		<template id="signup">
+			<div>
+				{{signupmsg}}
+			</div>
+		</template>
+		
+		
+		<script src="../js/vue.js"></script>
+		<script>
+			
+			/**
+			 * 切换组件方式二:
+			 * 		通过<component>标签结合is属性来实现切换组件的方式,绑定的属性为组件的名称,只需要调用方法改变组件名称即可实现组件的切换
+			 */
+			
+			// 登录组件
+			Vue.component("login",{
+				template:"#login",
+				data(){
+					return {
+						loginmsg:"登录组件"
+					}
+				}
+				
+			})
+			
+			
+			// 注册组件
+			Vue.component("signup",{
+				template:"#signup",
+				data(){
+					return {
+						signupmsg:"注册组件"
+					}
+				}
+				
+			})
+			
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message: "这是一个vue模板",
+					componentName:"login",
+					isActive:true
+				},
+				methods:{
+					
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>
