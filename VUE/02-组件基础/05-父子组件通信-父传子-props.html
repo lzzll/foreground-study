@@ -54,7 +54,7 @@
 			// 	}
 			// }
 			
-			// 自定义类型
+			// 自定义类型,实用function关键字定义,不能使用class
 			function Person(firstName,lastName){
 				this.firstName = firstName,
 				this.lastName=lastName
@@ -92,6 +92,12 @@
 						// },
 						
 						// 第二种增强写法：可以给每个变量名单独赋值类型、是否必传、默认值等属性
+						/**
+						 * 父组件向子组件传值注意：
+						 * 		* 父子组件中变量名称的定义不能采用驼峰式命名，只能采用全小写的方式；
+						 * 		* 父组件可向子组件传递自定义对象，也可传递基本数据类型的数组，但是不能传递自定义对象的数组
+						 * 
+						 */
 						props:{
 							cmessage:{
 								// 指定类型
