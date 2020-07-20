@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>基本vue模板</title>
+		<style>
+			.active{
+				color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="app" :class="{active:isActive}">
+			<horse-race-lamp></horse-race-lamp>
+		</div>
+		
+		
+		<template id="horseRaceLamp">
+			<div>
+				{{horseRaceLampMessage}}
+				<br/>
+				<input type="button" value="start" @click="start" />
+				<input type="button" value="stop" @click="stop" />
+			</div>
+			</div>
+		</template>
+		
+		
+		
+		<script src="../js/vue.js"></script>
+		<script>
+		
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message: "这是一个vue模板"
+				},
+				methods:{
+					isActive:true
+				},
+				components:{
+					horseRaceLamp:{
+						template:"#horseRaceLamp",
+						data(){
+							return {
+								horseRaceLampMessage:"遥映人间冰雪样,暗香幽浮曲临江",
+								intervalId:null
+							}
+						},
+						methods:{
+							start(){
+								if(this.intervalId) return;
+								this.intervalId = setInterval(()=>{
+									let start = this.horseRaceLampMessage.substring(0,1);
+									let end = this.horseRaceLampMessage.substring(1);
+									this.horseRaceLampMessage = end + start
+								},400)
+							},
+							stop(){
+								clearInterval(this.intervalId)
+								this.intervalId = null
+							}
+						}
+					}
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>
