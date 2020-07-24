@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>品牌列表组件</title>
+		<style>
+			.active{
+				color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="app" :class="{active:isActive}">
+			<my-brand-list></my-brand-list>
+		</div>
+		
+		<template id="barndList">
+			<div>
+				<ul>
+					<!-- <li v-for="(item,index) in brands">{{item.name}}---{{showPrice(item.price)}}</li> -->
+					<li v-for="(item,index) in brands">{{index}}---{{item.name}}---{{item.price}}</li>
+				</ul>
+				<!-- <h2>总价格为:{{showPrice(totalPrice)}}</h2> -->
+				<h2>总价格为:{{totalPrice}}</h2>
+				
+			</div>
+		</template>
+		
+		<script src="../js/vue.js"></script>
+		<script>
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message: "这是一个vue模板",
+					isActive:true
+				},
+				methods:{
+					
+				},
+				components:{
+					myBrandList:{
+						template:"#barndList",
+						data(){
+							return {
+								brands:[
+									{id:1,name:"宾利",price:5000000},
+									{id:2,name:"宝马",price:500000},
+									{id:3,name:"宝骏",price:50000}
+								]
+							}
+						},
+						computed:{
+							// 普通遍历
+							// totalPrice:function(){
+							// 	let totalPrice = 0;
+							// 	for (var i = 0; i < this.brands.length; i++) {
+							// 		totalPrice+=this.brands[i].price;
+							// 	}
+							// 	return totalPrice
+							// },
+							
+							// 高级函数 filter map reduce 
+							totalPrice(){
+								return this.brands.map(brand=>brand.price).reduce((preValue,nextValue)=>preValue+nextValue)
+							}
+							
+						},
+						// 子组件中不能定义过滤器？
+						filters:{
+							showPrice(price){
+								console.log(typeof price)
+								return price.toFixed(2)
+							}
+						}
+					}
+				}
+			})
+			
+			
+		</script>
+		
+	</body>
+</html>

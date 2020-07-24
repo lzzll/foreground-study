@@ -92,7 +92,7 @@ vue create 02-vuecli3test
   - runtime+compiler：大多数人使用的，可以编译template模板
   - runtime-only：比compiler模式要少6kb，并且效率更高，直接使用render函数
 - install vue-router：是否安装vue路由
-- user eslint to lint your code：是否使用ES规范
+- user eslint to lint your code：是否使用ES规范进行代码验证
 - set up unit tests：是否使用unit测试
 - setup e2e tests with nightwatch：是否使用end 2 end，点到点自动化测试
 - Should we run `npm install` for you after the project has been created? (recommended)：使用npm还是yarn管理工具
