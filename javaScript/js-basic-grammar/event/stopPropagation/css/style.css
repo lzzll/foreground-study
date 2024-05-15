@@ -1,0 +1,44 @@
+/* div{
+	width: 100px;
+	height: 100px;
+}
+
+input{
+	width: 10px;
+	height: 10px;
+} */
+
+
+/* 设置外层div为Flex容器 */
+.eventBubble {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  width: 500px;
+  height: 100px;
+  background-color: #f0f0f0; /* 可选：为了可视化效果添加背景色 */
+}
+
+/* 设置按钮样式 */
+.sumbit {
+  width: 100px;
+  height: 20px;
+  background-color: #007BFF; /* 可选：为了可视化效果添加背景色 */
+  border: none; /* 移除边框 */
+  outline: none; /* 移除轮廓 */
+}
+
+/* 外层容器样式 */
+.container{
+	height: 400px;
+	width: 100%;
+	float: left;
+	background-color: #007BFF; 
+}
+
+/* 内层子元素样式 */
+.childDiv{
+	height: 100px;
+	width: 25%;
+	float: left;
+}

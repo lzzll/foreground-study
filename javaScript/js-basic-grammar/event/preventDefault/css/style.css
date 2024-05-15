@@ -1,0 +1,12 @@
+/* form { 
+	width: 100px;
+	text-align: center;
+} */
+
+.changeDisable{
+	width: 20px;
+	height: 20px;
+	text-align: left;
+	background-color: #006600;
+	visibility: hidden;
+}
